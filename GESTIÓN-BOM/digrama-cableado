@@ -1,0 +1,43 @@
+Batería de Litio de 9V Elegoo
++ (Positivo) -> Vin (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+- (Negativo) -> GND (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+
+Placa Arduino Elegoo SmartCar-Shield-v1.1
+Vin -> Vin (Placa Arduino UNO R3)
+GND -> GND (Placa Arduino UNO R3)
+D2 -> Trig (Sensor Ultrasónico HC-SR04)
+D3 -> Echo (Sensor Ultrasónico HC-SR04)
+D4 -> S0 (Sensor de Color TCS3200)
+D5 -> S1 (Sensor de Color TCS3200)
+D6 -> S2 (Sensor de Color TCS3200)
+D7 -> S3 (Sensor de Color TCS3200)
+D8 -> OUT (Sensor de Color TCS3200)
+D9 -> Control (Servomotor Arduino SG90)
+D10 -> IN1 (Motor de Corriente Continua TT)
+D11 -> IN2 (Motor de Corriente Continua TT)
+D12 -> IN3 (Motor de Corriente Continua TT)
+D13 -> IN4 (Motor de Corriente Continua TT)
+
+Motor de Corriente Continua de 3V-6V TT con Engranaje de Doble Eje
++ (Positivo) -> VCC (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+- (Negativo) -> GND (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+
+Servomotor Arduino SG90
+VCC (Rojo) -> VCC (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+GND (Negro) -> GND (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+Control (Amarillo) -> D9 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+
+Sensor Ultrasónico HC-SR04
+VCC -> VCC (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+GND -> GND (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+Trig -> D2 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+Echo -> D3 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+
+Sensor de Color TCS3200
+VCC -> VCC (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+GND -> GND (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+S0 -> D4 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+S1 -> D5 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+S2 -> D6 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+S3 -> D7 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
+OUT -> D8 (Placa Arduino Elegoo SmartCar-Shield-v1.1)
