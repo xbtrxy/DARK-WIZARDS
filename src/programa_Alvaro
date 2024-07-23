@@ -1,0 +1,137 @@
+#include <Servo.h>
+
+#define Ena 3
+#define In1 6
+#define In2 7
+#define In3 8
+#define In4 9
+#define DISTANCIA_PORFI 20
+
+Servo ALVAROAVANZA;
+Servo ALVAROATACA;
+
+const int Trig = 13;
+const int Echo = 12;
+
+int rightDistance = 0, leftDistance = 0, middleDistance = 0;
+
+int distance()//empezamos 
+{
+  digitalWrite(Trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(Trig, HIGH);
+  delayMicroseconds(20);
+  digitalWrite(Trig, LOW);
+  float fdistance = pulseIn(Echo, HIGH) / 58; // Calculamos la distancia en cm
+  return (int)fdistance;
+}
+
+void forward()//avanza hijo avanza
+{
+  digitalWrite(In1, HIGH);
+  digitalWrite(In2, HIGH);
+  digitalWrite(In3, HIGH);
+  digitalWrite(In4, HIGH);
+  Serial.println("Adelante");
+}
+
+void Stop()//detente hijo por fi ,por la mamis
+{
+  analogWrite(Ena, LOW);
+  digitalWrite(In1, LOW);
+  digitalWrite(In2, LOW);
+  digitalWrite(In3, LOW);
+  digitalWrite(In4, LOW);
+  Serial.println("alto");
+}
+
+void setup()//tu puedes hijo tu sabes todo 
+{
+  Serial.begin(9600);
+  pinMode(In1, OUTPUT);
+  pinMode(In2, OUTPUT);
+  pinMode(In3, OUTPUT);
+  pinMode(In4, OUTPUT);
+  pinMode(Trig, OUTPUT);
+  pinMode(Echo, INPUT);
+  ALVAROAVANZA.attach(10);
+  ALVAROATACA.attach(11);
+}
+
+void right()
+{
+  ALVAROAVANZA.write(180); // Gira el servoMotor a 180 grados (derecha)
+  analogWrite(Ena, 150); // Enciende el motor DC con una velocidad de 150
+  forward(); // Avanza el motor brmm 
+  delay(200); // Espera 200 milisegundos
+  ALVAROAVANZA.write(180); // Mantiene el servoMotor en 180 grados (derecha)
+  delay(3200); // Espera 3200 milisegundos (3.2 segundos)
+  ALVAROAVANZA.write(102); // Vuelve el servoMotor a 102 grados (posición central)
+  Stop(); // Detiene el motor 
+  forward(); // Avanzael motor DC
+  middleDistance = distance(); // Mide la distancia con el sensor ultrasónico
+}
+
+void left()
+{
+  ALVAROAVANZA.write(0); // Gira el servoMotor a 0 grados (izquierda)
+  analogWrite(Ena, 100); // Enciende el motor DC con una velocidad de 100
+  forward(); // Avanza los motores Brmmmm
+  delay(3300); // Espera 3300 milisegundos (3.3 segundos)
+  ALVAROAVANZA.write(102); // Vuelve el servoMotor a 102 grados (posición central)
+  Stop(); // Detiene todos los motores
+  forward(); // Avanza el motor
+  middleDistance = distance(); // Mide la distancia con el sensor ultrasónico
+  Serial.println("Gira izquierda"); // manda la "orden"
+}
+
+void loop()//dala todo hijo tu puedes 
+{
+  ALVAROATACA.write(90);
+  delay(500);
+  ALVAROAVANZA.write(102);
+  delay(500);
+  analogWrite(Ena, 200);
+  forward();
+  ALVAROATACA.write(90);
+  delay(500);
+  ALVAROATACA.write(95);
+  delay(500);
+  middleDistance = distance();
+
+  // Lógica para manejar señales de tráfico
+  if (middleDistance <= 8) // Detecta obstáculo a menos de 8 cm
+  {
+    Stop();// no te choques tu eres inteligente 
+    delay(500);
+    ALVAROATACA.write(180);
+    delay(1000);
+    leftDistance = distance();
+    delay(500);
+    ALVAROATACA.write(90);
+    delay(1000);
+    ALVAROATACA.write(0);
+    delay(1000);
+    rightDistance = distance();
+    delay(500);
+    ALVAROATACA.write(90);
+    delay(1000);
+
+    // Decide qué dirección tomar según la distancia
+    if (leftDistance <= rightDistance)// decide bien por favao no seas bobo
+    {
+      right();
+      delay(350);
+    }
+    else
+    {
+      left();
+      delay(360);
+    }
+  }
+  else
+  {
+    // adelante correr a al meta si no hay obstáculo
+    forward();
+  }
+}
